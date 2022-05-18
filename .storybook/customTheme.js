@@ -5,7 +5,7 @@ export default create({
   
   "base": "light",
   "brandTitle": 'Onyxia UI',
-  "brandUrl": "https://github.com/garronej/onyxia-ui",
+  "brandUrl": "https://github.com/InseeFrLab/disiz",
   "brandImage": "/onyxiaLogo.png",
 
   // Toolbar default and active colors

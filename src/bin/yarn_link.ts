@@ -127,6 +127,6 @@ execYarnLink({ "cwd": pathJoin(onyxiaUiDirPath, "dist") });
 testAppNames.forEach(testAppName =>
     execYarnLink({
         "cwd": getTestAppPath(testAppName),
-        "targetModuleName": "onyxia-ui",
+        "targetModuleName": "disiz",
     }),
 );

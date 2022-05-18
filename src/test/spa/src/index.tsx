@@ -2,8 +2,8 @@ import { render } from "react-dom";
 import { ThemeProvider } from "./theme";
 import { MyComponent } from "./MyComponent";
 import { Text, splashScreen } from "./theme";
-import { getIsPortraitOrientation, ViewPortOutOfRangeError } from "onyxia-ui";
-import type { ThemeProviderProps } from "onyxia-ui";
+import { getIsPortraitOrientation, ViewPortOutOfRangeError } from "disiz";
+import type { ThemeProviderProps } from "disiz";
 
 
 const getViewPortConfig: ThemeProviderProps["getViewPortConfig"] =

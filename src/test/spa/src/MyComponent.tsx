@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { makeStyles, Icon, Text, Button } from "./theme";
 //Cherry pick the custom components you wish to import.
-import { Alert } from "onyxia-ui/Alert";
+import { Alert } from "disiz/Alert";
 
 //Use this hook to know if the dark mode is currently enabled.
 //and to toggle it's state.
 //Yo can import and use Materia-UI components, they will blend in nicely.
 import Switch from "@mui/material/Switch";
-import { useSplashScreen, useIsDarkModeEnabled } from "onyxia-ui";
+import { useSplashScreen, useIsDarkModeEnabled } from "disiz";
 
-//See: https://github.com/garronej/tss-react
+//See: https://github.com/InseeFrLab/tss-react
 const useStyles= makeStyles()(theme => ({
     "root": {
         "backgroundColor": theme.colors.useCases.surfaces.background,

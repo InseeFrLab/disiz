@@ -3,17 +3,17 @@ import {
     defaultPalette,
     createDefaultColorUseCases,
     defaultGetTypographyDesc
-} from "onyxia-ui/lib";
-import { createIcon } from "onyxia-ui/Icon";
-import { createIconButton } from "onyxia-ui/IconButton";
-import { createButton } from "onyxia-ui/Button";
-import { createText } from "onyxia-ui/Text";
+} from "disiz/lib";
+import { createIcon } from "disiz/Icon";
+import { createIconButton } from "disiz/IconButton";
+import { createButton } from "disiz/Button";
+import { createText } from "disiz/Text";
 import type { Param0 } from "tsafe";
 import { createMakeStyles } from "tss-react/compat";
-import { createOnyxiaSplashScreenLogo } from "onyxia-ui/lib/SplashScreen";
-import type { ThemeProviderProps } from "onyxia-ui";
-import "onyxia-ui/assets/fonts/WorkSans/font.css";
-import "onyxia-ui/assets/fonts/Marianne/font.css";
+import { createOnyxiaSplashScreenLogo } from "disiz/lib/SplashScreen";
+import type { ThemeProviderProps } from "disiz";
+import "disiz/assets/fonts/WorkSans/font.css";
+import "disiz/assets/fonts/Marianne/font.css";
 
 //Import icons from https://material-ui.com/components/material-icons/ that you plan to use
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";

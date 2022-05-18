@@ -8,10 +8,10 @@
     <i>Compatible with mui large library of components</i>
     <br>
     <br>
-    <img src="https://github.com/garronej/onyxia-ui/workflows/ci/badge.svg?branch=main">
-    <img src="https://img.shields.io/bundlephobia/minzip/onyxia-ui">
-    <img src="https://img.shields.io/npm/dw/onyxia-ui">
-    <img src="https://img.shields.io/npm/l/onyxia-ui">
+    <img src="https://github.com/InseeFrLab/disiz/workflows/ci/badge.svg?branch=main">
+    <img src="https://img.shields.io/bundlephobia/minzip/disiz">
+    <img src="https://img.shields.io/npm/dw/disiz">
+    <img src="https://img.shields.io/npm/l/disiz">
 </p>
 <p align="center">
   <a href="https://ui.onyxia.dev">Documentation</a>
@@ -21,7 +21,7 @@ Default design system carefully crafted by [Marc Hufschmitt](http://marchufschmi
 
 This project is under active development. It's APIs are susceptible to change until v1.
 
-WARNING: `onyxia-ui` isn't currently working with SSR. (You can't use it with Next.js)
+WARNING: `disiz` isn't currently working with SSR. (You can't use it with Next.js)
 
 # Motivation
 
@@ -36,7 +36,7 @@ In consequence, we wanted to create a ui toolkit that would be compatible with
 -   Built in support for the dark mode, persistent across reload.
 -   Easier, more guided, theme customization.
 -   Provide splash screen that hides your components while they are not yet loaded.
--   Leverages an arguably better styling API: [TSS](https://github.com/garronej/tss-react).
+-   Leverages an arguably better styling API: [TSS](https://github.com/InseeFrLab/tss-react).
 
 # Showcase
 
@@ -79,25 +79,25 @@ UI built with this toolkit.
 # Quick start
 
 ```bash
-yarn add onyxia-ui @mui/material @emotion/react @emotion/styled
+yarn add disiz @mui/material @emotion/react @emotion/styled
 
 # If you plan on using icons from: https://mui.com/components/material-icons/
 yarn add @mui/icons-material
 ```
 
-At this stage, the documentation is under the form of a very simple [demo project](https://github.com/garronej/onyxia-ui/tree/main/src/test).  
-The actual theme configuration [happens here](https://github.com/garronej/onyxia-ui/blob/main/src/test/src/theme.ts).  
+At this stage, the documentation is under the form of a very simple [demo project](https://github.com/InseeFrLab/disiz/tree/main/src/test).  
+The actual theme configuration [happens here](https://github.com/InseeFrLab/disiz/blob/main/src/test/src/theme.ts).  
 If you want to experiment with it you can run the demo app with:
 
 NOTE for [Storybook](https://storybook.js.org) users: As of writing this lines storybook still uses by default emotion 10.  
-mui and TSS runs emotion 11 so there is [some changes](https://github.com/garronej/onyxia-ui/blob/324de62248074582b227e584c53fb2e123f5325f/.storybook/main.js#L31-L32)
+mui and TSS runs emotion 11 so there is [some changes](https://github.com/InseeFrLab/disiz/blob/324de62248074582b227e584c53fb2e123f5325f/.storybook/main.js#L31-L32)
 to be made to your `.storybook/main.js` to make it uses emotion 11.
 
-[Launch dev environement](https://datalab.sspcloud.fr/launcher/inseefrlab-helm-charts-datascience/vscode?autoLaunch=true&onyxia.friendlyName=«Onyxia-ui»&onyxia.share=true&s3.enabled=false&kubernetes.role=«admin»&security.allowlist.enabled=false&git.repository=«https%3A%2F%2Fgithub.com%2FInseeFrLab%2Fonyxia-ui»&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fonyxia-ui%2Fmain%2Fonyxia-init.sh»)
+[Launch dev environement](https://datalab.sspcloud.fr/launcher/inseefrlab-helm-charts-datascience/vscode?autoLaunch=true&onyxia.friendlyName=«disiz»&onyxia.share=true&s3.enabled=false&kubernetes.role=«admin»&security.allowlist.enabled=false&git.repository=«https%3A%2F%2Fgithub.com%2FInseeFrLab%2Fdisiz»&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fdisiz%2Fmain%2Fonyxia-init.sh»)
 
 ```bash
-git clone https://github.com/garronej/onyxia-ui
-cd onyxia-ui
+git clone https://github.com/InseeFrLab/disiz
+cd disiz
 yarn
 yarn build
 yarn start

@@ -489,12 +489,12 @@ Doc UI marc
 - Fix previous commit  
 - Exprots pxToNumber  
 - Use useMergeRefs from powerhooks  
-- Merge pull request #8 from garronej/new_components
+- Merge pull request #8 from InseeFrLab/new_components
 
 New components  
 - Add DirectoryHeader and Breadcrump  
 - Merge remote-tracking branch 'origin/main' into new_components  
-- Merge pull request #6 from garronej/DarkModeSwitch-corrections
+- Merge pull request #6 from InseeFrLab/DarkModeSwitch-corrections
 
 Dark mode switch corrections  
 - Improve readme  
@@ -679,7 +679,7 @@ Correction of differents sizes and lines height
   
 ### **0.3.8** (2021-06-13)  
   
-- Merge pull request #2 from garronej/add_breakpoints_in_theme
+- Merge pull request #2 from InseeFrLab/add_breakpoints_in_theme
 
 Add breakpoints in theme  
 - Add breakpoints in theme    
