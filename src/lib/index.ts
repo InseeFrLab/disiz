@@ -6,8 +6,6 @@ export type {
 
 export {
     defaultPalette,
-    francePalette,
-    ultravioletPalette,
     createDefaultColorUseCases,
     changeColorOpacity,
     useIsDarkModeEnabled,
@@ -31,8 +29,6 @@ export { defaultSpacingConfig } from "./spacing";
 
 export type { IconSizeName, GetIconSizeInPx } from "./icon";
 export { defaultGetIconSizeInPx } from "./icon";
-
-export { useSplashScreen } from "./SplashScreen";
 
 export type { Theme, ThemeProviderProps } from "./ThemeProvider";
 export {

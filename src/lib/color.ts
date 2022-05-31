@@ -15,92 +15,90 @@ export type CreateColorUseCase<
 > = (params: { isDarkModeEnabled: boolean; palette: Palette }) => ColorUseCases;
 
 export const defaultPalette = {
-    "focus": {
-        "main": "#FF562C",
-        "light": "#FF562C",
-        "light2": "#FFAD99",
+    "inseeBlue": {
+        "900": "#072A43",
+        "800": "#0C3A5A",
+        "700": "#0F417A",
+        "600": "#0A4AA5",
+        "500": "#286AC7",
+        "400": "#5B8ED4",
+        "300": "#8DB0E1",
+        "200": "#AACAF1",
+        "100": "#C4E1FF",
     },
-    "dark": {
-        "main": "#2C323F",
-        "light": "#373E4F",
-        "greyVariant1": "#242C39",
-        "greyVariant2": "#5A6270",
-        "greyVariant3": "#8A9099",
-        "greyVariant4": "#B8BABF",
+    "inseeYellow": {
+        "900": "#B07102",
+        "800": "#D98C07",
+        "700": "#E89E0B",
+        "600": "#FFC300",
+        "500": "#FBD616",
+        "400": "#FFDA5A",
+        "300": "#FFE58E",
+        "200": "#FFEAAB",
+        "100": "#FDF0C9",
     },
-    "light": {
-        "main": "#F1F0EB",
-        "light": "#FDFDFC",
-        "greyVariant1": "#E6E6E6",
-        "greyVariant2": "#C9C9C9",
-        "greyVariant3": "#9E9E9E",
-        "greyVariant4": "#747474",
+    "inseeGray": {
+        "900": "#0A192E",
+        "800": "#1D2A3D",
+        "700": "#3A4657",
+        "600": "#57677D",
+        "500": "#7C8A9D",
+        "400": "#BCC2CC",
+        "300": "#D3DBE5",
+        "200": "#E6EAF0",
+        "100": "#F5F7FA",
+        "black": "#000000",
+        "white": "#FFFFFF",
     },
-    "redError": {
-        "main": "#CC0B0B",
-        "light": "#FEECEB",
+    "inseeRed": {
+        "900": "#5D1212",
+        "800": "#820B26",
+        "700": "#9A1D39",
+        "600": "#C00534",
+        "500": "#E4003A",
+        "400": "#EB617F",
+        "300": "#F190A5",
+        "200": "#F5B8C2",
+        "100": "#FBDFE4",
     },
-    "greenSuccess": {
-        "main": "#29CC2F",
-        "light": "#EEFAEE",
+    "inseeAqua": {
+        "900": "#103444",
+        "800": "#1C4B5F",
+        "700": "#0C6876",
+        "600": "#008085",
+        "500": "#0AACAB",
+        "400": "#71C3C7",
+        "300": "#97CFD0",
+        "200": "#C6E3E4",
+        "100": "#DDEFF0",
     },
-    "orangeWarning": {
-        "main": "#FF8800",
-        "light": "#FFF5E5",
+    "inseeMagenta": {
+        "900": "#79044E",
+        "800": "#991167",
+        "700": "#A92779",
+        "600": "#B43B87",
+        "500": "#CD4C9D",
+        "400": "#E182BE",
+        "300": "#E294C6",
+        "200": "#F0B9DC",
+        "100": "#F3D2E7",
     },
-    "blueInfo": {
-        "main": "#2196F3",
-        "light": "#E9F5FE",
+    "inseeGreen": {
+        "900": "#044628",
+        "800": "#03532F",
+        "700": "#036237",
+        "600": "#068043",
+        "500": "#1CA459",
+        "400": "#4BB375",
+        "300": "#8BC8A4",
+        "200": "#A2D3B6",
+        "100": "#C0E0CA",
     },
-};
-
-export const francePalette: typeof defaultPalette = {
-    ...defaultPalette,
-    "focus": {
-        "main": "#000091",
-        "light": "#9A9AFF",
-        "light2": "#E5E5F4",
-    },
-    "dark": {
-        "main": "#2A2A2A",
-        "light": "#383838",
-        "greyVariant1": "#161616",
-        "greyVariant2": "#9C9C9C",
-        "greyVariant3": "#CECECE",
-        "greyVariant4": "#E5E5E5",
-    },
-    "light": {
-        "main": "#F1F0EB",
-        "light": "#FDFDFC",
-        "greyVariant1": "#E6E6E6",
-        "greyVariant2": "#C9C9C9",
-        "greyVariant3": "#9E9E9E",
-        "greyVariant4": "#747474",
-    },
-};
-
-export const ultravioletPalette: typeof defaultPalette = {
-    ...defaultPalette,
-    "focus": {
-        "main": "#067A76",
-        "light": "#0AD6CF",
-        "light2": "#AEE4E3",
-    },
-    "dark": {
-        "main": "#2D1C3A",
-        "light": "#4A3957",
-        "greyVariant1": "#22122E",
-        "greyVariant2": "#493E51",
-        "greyVariant3": "#918A98",
-        "greyVariant4": "#C0B8C6",
-    },
-    "light": {
-        "main": "#F7F5F4",
-        "light": "#FDFDFC",
-        "greyVariant1": "#E6E6E6",
-        "greyVariant2": "#C9C9C9",
-        "greyVariant3": "#9E9E9E",
-        "greyVariant4": "#747474",
+    "TODO": {
+        "main": "#FFC0CB",
+        "light": "#FFC0CB",
+        "light2": "#FFC0CB",
+        "dark": "#FFC0CB",
     },
 };
 
@@ -110,76 +108,107 @@ export function createDefaultColorUseCases(
     const { isDarkModeEnabled, palette } = params;
 
     return {
+        "surfaces": {
+            "primary": palette.inseeGray[isDarkModeEnabled ? "900" : "100"],
+            "secondary": palette.inseeGray[isDarkModeEnabled ? "800" : "white"],
+            "tertiary": palette.inseeGray[isDarkModeEnabled ? "700" : "200"],
+        },
         "typography": {
-            "textPrimary": palette[isDarkModeEnabled ? "light" : "dark"].main,
+            "textPrimary": isDarkModeEnabled
+                ? palette.inseeGray["100"]
+                : palette.inseeBlue["700"],
             "textSecondary":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant4,
+                palette.inseeGray[isDarkModeEnabled ? "300" : "700"],
             "textTertiary":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant2,
+                palette.inseeGray[isDarkModeEnabled ? "500" : "600"],
             "textDisabled":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant2,
-            "textFocus": palette.focus[isDarkModeEnabled ? "light" : "main"],
+                palette.inseeGray[isDarkModeEnabled ? "600" : "400"],
+            "textFocus": palette.inseeGray[isDarkModeEnabled ? "800" : "500"],
+        },
+        "accent": {
+            "dark": palette.inseeYellow[isDarkModeEnabled ? "200" : "700"],
+            "main": palette.inseeYellow["500"],
+            "light": palette.inseeYellow[isDarkModeEnabled ? "700" : "200"],
+            "mainAlpha20": changeColorOpacity({
+                "color": palette.inseeYellow["500"],
+                "opacity": 0.2,
+            }),
+            "mainAlpha10": changeColorOpacity({
+                "color": palette.inseeYellow["500"],
+                "opacity": 0.1,
+            }),
+            "mainAlpha5": changeColorOpacity({
+                "color": palette.inseeYellow["500"],
+                "opacity": 0.07,
+            }),
+        },
+        "alertSeverity": {
+            "success": {
+                "dark": palette.inseeGreen[isDarkModeEnabled ? "100" : "700"],
+                "main": palette.inseeGreen[isDarkModeEnabled ? "400" : "500"],
+                "light": palette.inseeGreen[isDarkModeEnabled ? "500" : "300"],
+                "background":
+                    palette.inseeGreen[isDarkModeEnabled ? "900" : "100"],
+                "mainAlpha10": changeColorOpacity({
+                    "color":
+                        palette.inseeGreen[isDarkModeEnabled ? "400" : "500"],
+                    "opacity": 0.1,
+                }),
+            },
+            "error": {
+                "dark": palette.inseeRed[isDarkModeEnabled ? "100" : "700"],
+                "main": palette.inseeRed[isDarkModeEnabled ? "400" : "500"],
+                "light": palette.inseeRed[isDarkModeEnabled ? "500" : "300"],
+                "background":
+                    palette.inseeRed[isDarkModeEnabled ? "900" : "100"],
+                "mainAlpha10": changeColorOpacity({
+                    "color":
+                        palette.inseeRed[isDarkModeEnabled ? "400" : "500"],
+                    "opacity": 0.1,
+                }),
+            },
+            "warning": {
+                "dark": palette.inseeYellow[isDarkModeEnabled ? "100" : "700"],
+                "main": palette.inseeYellow[isDarkModeEnabled ? "400" : "500"],
+                "light": palette.inseeYellow[isDarkModeEnabled ? "500" : "300"],
+                "background":
+                    palette.inseeYellow[isDarkModeEnabled ? "900" : "100"],
+                "mainAlpha10": changeColorOpacity({
+                    "color":
+                        palette.inseeYellow[isDarkModeEnabled ? "400" : "500"],
+                    "opacity": 0.1,
+                }),
+            },
+            "info": {
+                "dark": palette.inseeBlue[isDarkModeEnabled ? "100" : "700"],
+                "main": palette.inseeBlue[isDarkModeEnabled ? "400" : "500"],
+                "light": palette.inseeBlue[isDarkModeEnabled ? "500" : "300"],
+                "background":
+                    palette.inseeBlue[isDarkModeEnabled ? "900" : "100"],
+                "mainAlpha10": changeColorOpacity({
+                    "color":
+                        palette.inseeBlue[isDarkModeEnabled ? "400" : "500"],
+                    "opacity": 0.1,
+                }),
+            },
         },
         "buttons": {
             "actionHoverPrimary":
-                palette.focus[isDarkModeEnabled ? "light" : "main"],
+                palette.TODO[isDarkModeEnabled ? "light" : "main"],
             "actionHoverSecondary": isDarkModeEnabled
-                ? palette.light.light
-                : palette.dark.main,
-            "actionHoverTernary": palette.light.main,
+                ? palette.TODO.light
+                : palette.TODO.main,
+            "actionHoverTernary": palette.TODO.main,
             "actionSelected": isDarkModeEnabled
-                ? palette.dark.light
-                : palette.light.greyVariant1,
-            "actionActive": palette.focus[isDarkModeEnabled ? "light" : "main"],
+                ? palette.TODO.light
+                : palette.TODO.dark,
+            "actionActive": palette.TODO[isDarkModeEnabled ? "light" : "main"],
             "actionDisabled":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant3,
+                palette.TODO[isDarkModeEnabled ? "dark" : "light"],
             "actionDisabledBackground":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant1,
+                palette.TODO[isDarkModeEnabled ? "dark" : "light"],
         },
-        "surfaces": {
-            "background": palette[isDarkModeEnabled ? "dark" : "light"].main,
-            "surface1": palette[isDarkModeEnabled ? "dark" : "light"].light,
-            "surface2":
-                palette[isDarkModeEnabled ? "dark" : "light"].greyVariant1,
-        },
-        "alertSeverity": {
-            "error": {
-                "main": palette.redError.main,
-                "background": isDarkModeEnabled
-                    ? changeColorOpacity({
-                          "color": palette.redError.main,
-                          "opacity": 0.2,
-                      })
-                    : palette.redError.light,
-            },
-            "success": {
-                "main": palette.greenSuccess.main,
-                "background": isDarkModeEnabled
-                    ? changeColorOpacity({
-                          "color": palette.greenSuccess.main,
-                          "opacity": 0.2,
-                      })
-                    : palette.greenSuccess.light,
-            },
-            "warning": {
-                "main": palette.orangeWarning.main,
-                "background": isDarkModeEnabled
-                    ? changeColorOpacity({
-                          "color": palette.orangeWarning.main,
-                          "opacity": 0.2,
-                      })
-                    : palette.orangeWarning.light,
-            },
-            "info": {
-                "main": palette.blueInfo.main,
-                "background": isDarkModeEnabled
-                    ? changeColorOpacity({
-                          "color": palette.blueInfo.main,
-                          "opacity": 0.2,
-                      })
-                    : palette.blueInfo.light,
-            },
-        },
+        "todo": palette.TODO.dark,
     };
 }
 
@@ -193,8 +222,8 @@ export function createMuiPaletteOptions(params: {
     return {
         "mode": isDarkModeEnabled ? "dark" : "light",
         "primary": {
-            "main": palette.focus[isDarkModeEnabled ? "light" : "main"],
-            "light": palette.focus.light2,
+            "main": useCases.accent.main,
+            "light": useCases.accent.light,
         },
         "secondary": {
             "main": useCases.typography.textPrimary,
@@ -225,10 +254,10 @@ export function createMuiPaletteOptions(params: {
             "secondary": useCases.typography.textSecondary,
             "disabled": useCases.typography.textDisabled,
         },
-        "divider": useCases.buttons.actionDisabledBackground,
+        "divider": useCases.typography.textPrimary,
         "background": {
-            "paper": useCases.surfaces.surface1,
-            "default": useCases.surfaces.background,
+            "paper": useCases.surfaces.secondary,
+            "default": useCases.surfaces.primary,
         },
         "action": {
             "active": useCases.buttons.actionActive,

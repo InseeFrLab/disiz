@@ -173,22 +173,24 @@ export function createButton<IconId extends string = never>(params?: {
             ];
 
         const hoverTextColor = (() => {
-            switch (theme.isDarkModeEnabled) {
-                case true:
-                    return theme.colors.palette[
-                        (() => {
-                            switch (variant) {
-                                case "primary":
-                                    return "light";
-                                case "secondary":
-                                case "ternary":
-                                    return "dark";
-                            }
-                        })()
-                    ].main;
-                case false:
-                    return theme.colors.palette.light.main;
-            }
+            // TODO see with designer and modify with right color
+            // switch (theme.isDarkModeEnabled) {
+            //     case true:
+            //         return theme.colors.palette[
+            //             (() => {
+            //                 switch (variant) {
+            //                     case "primary":
+            //                         return "light";
+            //                     case "secondary":
+            //                     case "ternary":
+            //                         return "dark";
+            //                 }
+            //             })()
+            //         ].main;
+            //     case false:
+            //         return theme.colors.palette.light.main;
+            // }
+            return theme.colors.useCases.todo;
         })();
 
         return {
@@ -237,7 +239,7 @@ export function createButton<IconId extends string = never>(params?: {
                                       return "transparent";
                                   case "ternary":
                                       return theme.colors.useCases.surfaces
-                                          .background;
+                                          .primary;
                               }
                           })(),
                     "borderRadius": approxHeight / 2,

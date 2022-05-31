@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import type { Theme as MuiTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
-import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import {
+    ThemeProvider as MuiThemeProvider,
     createTheme as createMuiTheme,
     unstable_createMuiStrictModeTheme,
 } from "@mui/material/styles";
@@ -20,6 +20,7 @@ import {
     createDefaultColorUseCases,
     useIsDarkModeEnabled,
     evtIsDarkModeEnabled,
+    createMuiPaletteOptions,
 } from "./color";
 import type { ComputedTypography, GetTypographyDesc } from "./typography";
 import {
@@ -27,7 +28,6 @@ import {
     createMuiTypographyOptions,
     getComputedTypography,
 } from "./typography";
-import { createMuiPaletteOptions } from "./color";
 import { shadows } from "./shadows";
 import { useBrowserFontSizeFactor } from "powerhooks/useBrowserFontSizeFactor";
 import { defaultSpacingConfig } from "./spacing";
@@ -35,8 +35,6 @@ import type { SpacingConfig, Spacing } from "./spacing";
 import { createMakeStyles } from "tss-react/compat";
 import type { IconSizeName, GetIconSizeInPx } from "./icon";
 import { defaultGetIconSizeInPx, getIconSizesInPxByName } from "./icon";
-import { createSplashScreen } from "./SplashScreen";
-import type { SplashScreenProps } from "./SplashScreen";
 import {
     ViewPortAdapter,
     ViewPortOutOfRangeError,
@@ -106,7 +104,6 @@ export type ThemeProviderProps = {
      * the callback will be invoked again, it's best
      * a cont callback */
     getViewPortConfig?: ViewPortAdapterProps["getConfig"];
-    splashScreen?: Omit<SplashScreenProps, "children">;
 };
 
 export declare namespace ThemeProviderProps {
@@ -323,8 +320,6 @@ export function createThemeProvider<
         return { useTheme };
     })();
 
-    const { SplashScreen } = createSplashScreen({ useTheme });
-
     const muiCache = createCache({
         "key": "mui",
         "prepend": true,
@@ -332,16 +327,14 @@ export function createThemeProvider<
 
     const { ThemeProvider } = (() => {
         function ThemeProviderWithinViewPortAdapter(props: {
-            splashScreen: ThemeProviderProps["splashScreen"];
             children: ReactNode;
         }) {
-            const { splashScreen, children } = props;
+            const { children } = props;
 
             const theme = useTheme();
 
             {
-                const backgroundColor =
-                    theme.colors.useCases.surfaces.background;
+                const backgroundColor = theme.colors.useCases.surfaces.primary;
 
                 useEffect(() => {
                     document.querySelector("meta[name=theme-color]")?.remove();
@@ -364,21 +357,12 @@ export function createThemeProvider<
                 [isStoryProvider],
             );
 
-            // prettier-ignore
-            const SplashScreenOrId = useGuaranteedMemo(
-                (): ReactComponent<{ children: ReactNode }> =>
-                    splashScreen === undefined ?
-                        (({ children }) => <>{children}</>) :
-                        (({ children }) => <SplashScreen {...splashScreen}>{children}</SplashScreen>),
-                [splashScreen],
-            );
-
             return (
                 <themeBaseContext.Provider value={theme}>
                     <CacheProvider value={muiCache}>
                         <MuiThemeProvider theme={theme.muiTheme}>
                             <CssBaselineOrScopedCssBaseline>
-                                <SplashScreenOrId>{children}</SplashScreenOrId>
+                                {children}
                             </CssBaselineOrScopedCssBaseline>
                         </MuiThemeProvider>
                     </CacheProvider>
@@ -387,7 +371,7 @@ export function createThemeProvider<
         }
 
         function ThemeProvider(props: ThemeProviderProps) {
-            const { getViewPortConfig, children, splashScreen } = props;
+            const { getViewPortConfig, children } = props;
 
             // prettier-ignore
             const ViewPortAdapterOrId = useGuaranteedMemo(
@@ -399,9 +383,7 @@ export function createThemeProvider<
 
             return (
                 <ViewPortAdapterOrId>
-                    <ThemeProviderWithinViewPortAdapter
-                        splashScreen={splashScreen}
-                    >
+                    <ThemeProviderWithinViewPortAdapter>
                         {children}
                     </ThemeProviderWithinViewPortAdapter>
                 </ViewPortAdapterOrId>
