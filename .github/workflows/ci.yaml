@@ -1,159 +1,158 @@
 name: ci
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
 
 jobs:
+    test_lint:
+        runs-on: ubuntu-latest
+        if: ${{ !github.event.created && github.repository != 'InseeFrLab/ts_ci' }}
+        steps:
+            - uses: actions/checkout@v2.3.4
+            - uses: actions/setup-node@v2.1.3
+            - uses: bahmutov/npm-install@v1
+            - name: If this step fails run 'npm run lint' and 'npm run format' then commit again.
+              run: |
+                  PACKAGE_MANAGER=npm
+                  if [ -f "./yarn.lock" ]; then
+                      PACKAGE_MANAGER=yarn
+                  fi
+                  $PACKAGE_MANAGER run lint:check
+                  $PACKAGE_MANAGER run format:check
+    test:
+        runs-on: ${{ matrix.os }}
+        needs: test_lint
+        strategy:
+            matrix:
+                node: ["16"]
+                os: [ubuntu-latest]
+        name: Test with Node v${{ matrix.node }} on ${{ matrix.os }}
+        steps:
+            - name: Tell if project is using npm or yarn
+              id: step1
+              uses: garronej/github_actions_toolkit@v2.4
+              with:
+                  action_name: tell_if_project_uses_npm_or_yarn
+            - uses: actions/checkout@v2.3.4
+            - uses: actions/setup-node@v2.1.3
+              with:
+                  node-version: ${{ matrix.node }}
+            - uses: bahmutov/npm-install@v1
+            - if: steps.step1.outputs.npm_or_yarn == 'yarn'
+              run: yarn build
+            - if: steps.step1.outputs.npm_or_yarn == 'npm'
+              run: npm run build
 
-  test_lint:
-    runs-on: ubuntu-latest
-    if: ${{ !github.event.created && github.repository != 'InseeFrLab/ts_ci' }}
-    steps:
-    - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.3
-    - uses: bahmutov/npm-install@v1
-    - name: If this step fails run 'npm run lint' and 'npm run format' then commit again.
-      run: |
-        PACKAGE_MANAGER=npm
-        if [ -f "./yarn.lock" ]; then
-            PACKAGE_MANAGER=yarn
-        fi
-        $PACKAGE_MANAGER run lint:check
-        $PACKAGE_MANAGER run format:check
-  test:
-    runs-on: ${{ matrix.os }}
-    needs: test_lint
-    strategy:
-      matrix:
-        node: [ '16' ]
-        os: [ ubuntu-latest ]
-    name: Test with Node v${{ matrix.node }} on ${{ matrix.os }}
-    steps:
-    - name: Tell if project is using npm or yarn
-      id: step1
-      uses: InseeFrLab/github_actions_toolkit@v2.2
-      with: 
-        action_name: tell_if_project_uses_npm_or_yarn
-    - uses: actions/checkout@v2.3.4
-    - uses: actions/setup-node@v2.1.3
-      with:
-        node-version: ${{ matrix.node }}
-    - uses: bahmutov/npm-install@v1
-    - if: steps.step1.outputs.npm_or_yarn == 'yarn'
-      run: yarn build
-    - if: steps.step1.outputs.npm_or_yarn == 'npm'
-      run: npm run build
+    check_if_version_upgraded:
+        name: Check if version upgrade
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        needs: test
+        outputs:
+            from_version: ${{ steps.step1.outputs.from_version }}
+            to_version: ${{ steps.step1.outputs.to_version }}
+            is_upgraded_version: ${{steps.step1.outputs.is_upgraded_version }}
+        steps:
+            - uses: garronej/github_actions_toolkit@v2.4
+              id: step1
+              with:
+                  action_name: is_package_json_version_upgraded
 
-  check_if_version_upgraded:
-    name: Check if version upgrade
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    needs: test
-    outputs:
-      from_version: ${{ steps.step1.outputs.from_version }}
-      to_version: ${{ steps.step1.outputs.to_version }}
-      is_upgraded_version: ${{steps.step1.outputs.is_upgraded_version }}
-    steps:
-    - uses: InseeFrLab/github_actions_toolkit@v2.2
-      id: step1
-      with: 
-        action_name: is_package_json_version_upgraded
-        
-  deploy_storybook:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.3
-        with:
-          node-version: '15'
-      - uses: bahmutov/npm-install@v1
-      - run: npx build-storybook --static-dir ./.storybook/static --output-dir ./build_storybook
-      - run: echo "ui.onyxia.dev" > build_storybook/CNAME
-      - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: npx -y -p gh-pages@3.1.0 gh-pages -d ./build_storybook -u "github-actions-bot <actions@github.com>"
+    deploy_storybook:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2.1.3
+              with:
+                  node-version: "15"
+            - uses: bahmutov/npm-install@v1
+            - run: npx build-storybook --static-dir ./.storybook/static --output-dir ./build_storybook
+            - run: echo "ui.onyxia.dev" > build_storybook/CNAME
+            - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - run: npx -y -p gh-pages@3.1.0 gh-pages -d ./build_storybook -u "github-actions-bot <actions@github.com>"
 
-  update_changelog:
-    runs-on: ubuntu-latest
-    needs: check_if_version_upgraded
-    if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true'
-    steps:
-    - uses: InseeFrLab/github_actions_toolkit@v2.4
-      with:
-        action_name: update_changelog
-        branch: ${{ github.ref }}
+    update_changelog:
+        runs-on: ubuntu-latest
+        needs: check_if_version_upgraded
+        if: needs.check_if_version_upgraded.outputs.is_upgraded_version == 'true'
+        steps:
+            - uses: garronej/github_actions_toolkit@v2.4
+              with:
+                  action_name: update_changelog
+                  branch: ${{ github.ref }}
 
-  create_github_release:
-    runs-on: ubuntu-latest
-    needs: 
-      - update_changelog
-      - check_if_version_upgraded
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.ref }}
-    - name: Build GitHub release body
-      id: step1
-      run: |
-        if [ "$FROM_VERSION" = "0.0.0" ]; then
-            echo "::set-output name=body::🚀"
-        else
-            echo "::set-output name=body::📋 [CHANGELOG](https://github.com/$GITHUB_REPOSITORY/blob/v$TO_VERSION/CHANGELOG.md)"
-        fi
-      env: 
-        FROM_VERSION: ${{ needs.check_if_version_upgraded.outputs.from_version }}
-        TO_VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
-    - uses: InseeFrLab/action-gh-release@v0.2.0
-      with:
-        name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
-        target_commitish: ${{ github.ref }}
-        body: ${{ steps.step1.outputs.body }}
-        draft: false
-        prerelease: false
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+    create_github_release:
+        runs-on: ubuntu-latest
+        needs:
+            - update_changelog
+            - check_if_version_upgraded
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  ref: ${{ github.ref }}
+            - name: Build GitHub release body
+              id: step1
+              run: |
+                  if [ "$FROM_VERSION" = "0.0.0" ]; then
+                      echo "::set-output name=body::🚀"
+                  else
+                      echo "::set-output name=body::📋 [CHANGELOG](https://github.com/$GITHUB_REPOSITORY/blob/v$TO_VERSION/CHANGELOG.md)"
+                  fi
+              env:
+                  FROM_VERSION: ${{ needs.check_if_version_upgraded.outputs.from_version }}
+                  TO_VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
+            - uses: InseeFrLab/action-gh-release@v0.2.0
+              with:
+                  name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
+                  tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
+                  target_commitish: ${{ github.ref }}
+                  body: ${{ steps.step1.outputs.body }}
+                  draft: false
+                  prerelease: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  publish_on_npm:
-    runs-on: ubuntu-latest
-    needs: 
-      - update_changelog
-      - check_if_version_upgraded
-    steps:
-    - uses: actions/checkout@v2.3.4
-      with:
-        ref: ${{ github.ref }}
-    - uses: actions/setup-node@v2.1.3
-      with:
-        node-version: '15'
-        registry-url: https://registry.npmjs.org/
-    - uses: bahmutov/npm-install@v1
-    - run: |
-        PACKAGE_MANAGER=npm
-        if [ -f "./yarn.lock" ]; then
-            PACKAGE_MANAGER=yarn
-        fi
-        $PACKAGE_MANAGER run build
-    - run: npx -y -p denoify@0.6.5 denoify_enable_short_npm_import_path
-      env:
-        DRY_RUN: "0"
-    - name: Publishing on NPM
-      run: |
-        if [ "$(npm show . version)" = "$VERSION" ]; then
-          echo "This version is already published"
-          exit 0
-        fi
-        if [ "$NODE_AUTH_TOKEN" = "" ]; then
-          echo "Can't publish on NPM, You must first create a secret called NPM_TOKEN that contains your NPM auth token. https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets"
-          false
-        fi
-        npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-        VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
+    publish_on_npm:
+        runs-on: ubuntu-latest
+        needs:
+            - update_changelog
+            - check_if_version_upgraded
+        steps:
+            - uses: actions/checkout@v2.3.4
+              with:
+                  ref: ${{ github.ref }}
+            - uses: actions/setup-node@v2.1.3
+              with:
+                  node-version: "15"
+                  registry-url: https://registry.npmjs.org/
+            - uses: bahmutov/npm-install@v1
+            - run: |
+                  PACKAGE_MANAGER=npm
+                  if [ -f "./yarn.lock" ]; then
+                      PACKAGE_MANAGER=yarn
+                  fi
+                  $PACKAGE_MANAGER run build
+            - run: npx -y -p denoify@0.6.5 denoify_enable_short_npm_import_path
+              env:
+                  DRY_RUN: "0"
+            - name: Publishing on NPM
+              run: |
+                  if [ "$(npm show . version)" = "$VERSION" ]; then
+                    echo "This version is already published"
+                    exit 0
+                  fi
+                  if [ "$NODE_AUTH_TOKEN" = "" ]; then
+                    echo "Can't publish on NPM, You must first create a secret called NPM_TOKEN that contains your NPM auth token. https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets"
+                    false
+                  fi
+                  npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+                  VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
