@@ -146,7 +146,7 @@ export function createIconButton<IconId extends string = never>(params?: {
             "&:hover": {
                 "backgroundColor": "unset",
                 "& svg": {
-                    "color": theme.colors.useCases.buttons.actionHoverPrimary,
+                    "color": theme.colors.useCases.accent.main,
                 },
             },
 

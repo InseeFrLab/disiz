@@ -106,7 +106,7 @@ export function getStoryFactory<Props extends Record<string, any>>(params: {
                         },
                         "body": {
                             "padding": `0 !important`,
-                            "backgroundColor": `${theme.colors.useCases.surfaces.surface1} !important`,
+                            "backgroundColor": `${theme.colors.useCases.surfaces.primary} !important`,
                         },
                     }}
                 />

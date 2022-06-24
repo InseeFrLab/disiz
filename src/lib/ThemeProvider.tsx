@@ -18,8 +18,6 @@ import type {
 import {
     defaultPalette,
     createDefaultColorUseCases,
-    useIsDarkModeEnabled,
-    evtIsDarkModeEnabled,
     createMuiPaletteOptions,
 } from "./color";
 import type { ComputedTypography, GetTypographyDesc } from "./typography";
@@ -46,6 +44,10 @@ import { breakpointsValues } from "./breakpoints";
 import { capitalize } from "tsafe/capitalize";
 import createCache from "@emotion/cache";
 import { useGuaranteedMemo } from "powerhooks/useGuaranteedMemo";
+import {
+    useIsDarkModeEnabled,
+    evtIsDarkModeEnabled,
+} from "./useIsDarkModeEnabled";
 
 export { useDomRect } from "powerhooks/useDomRect";
 export { useWindowInnerSize, useBrowserFontSizeFactor };
@@ -203,7 +205,6 @@ export function createThemeProvider<
                             }),
                             "palette": createMuiPaletteOptions({
                                 isDarkModeEnabled,
-                                palette,
                                 useCases,
                             }),
                             spacing,

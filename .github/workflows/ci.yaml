@@ -72,7 +72,7 @@ jobs:
                   node-version: "15"
             - uses: bahmutov/npm-install@v1
             - run: npx build-storybook --static-dir ./.storybook/static --output-dir ./build_storybook
-            - run: echo "ui.onyxia.dev" > build_storybook/CNAME
+            # - run: echo "ui.onyxia.dev" > build_storybook/CNAME
             - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,6 +12,7 @@ import type { Equals } from "tsafe/Equals";
 import { breakpointsValues } from "./lib/breakpoints";
 import { variantNameUsedForMuiButton } from "./lib/typography";
 import { pxToNumber } from "./tools/pxToNumber";
+import { changeColorOpacity } from "./lib";
 
 export type ButtonProps<IconId extends string = never> =
     | ButtonProps.Regular<IconId>
@@ -22,7 +23,12 @@ export namespace ButtonProps {
         className?: string;
 
         /** Defaults to "primary" */
-        variant?: "primary" | "secondary" | "ternary";
+        variant?:
+            | "primary"
+            | "secondary"
+            | "ternary"
+            | "borderless"
+            | "transparent";
 
         children: React.ReactNode;
 
@@ -163,50 +169,43 @@ export function createButton<IconId extends string = never>(params?: {
                     ? "textDisabled"
                     : (() => {
                           switch (variant) {
-                              case "primary":
-                                  return "textFocus";
-                              case "secondary":
+                              case "transparent":
                               case "ternary":
+                                  return "textFocus";
+                              case "primary":
+                                  return "textPrimary";
+                              case "secondary":
+                              case "borderless":
                                   return "textPrimary";
                           }
                       })()
             ];
 
-        const hoverTextColor = (() => {
-            // TODO see with designer and modify with right color
-            // switch (theme.isDarkModeEnabled) {
-            //     case true:
-            //         return theme.colors.palette[
-            //             (() => {
-            //                 switch (variant) {
-            //                     case "primary":
-            //                         return "light";
-            //                     case "secondary":
-            //                     case "ternary":
-            //                         return "dark";
-            //                 }
-            //             })()
-            //         ].main;
-            //     case false:
-            //         return theme.colors.palette.light.main;
-            // }
-            return theme.colors.useCases.todo;
-        })();
+        // const hoverTextColor = (() => {
+        //     switch (theme.isDarkModeEnabled) {
+        //         case true:
+        //             return theme.colors.palette[
+        //                 (() => {
+        //                     switch (variant) {
+        //                         case "primary":
+        //                             return "light";
+        //                         case "secondary":
+        //                         case "ternary":
+        //                         case "borderless":
+        //                         case "transparent"
+        //                                 return "dark";
+        //                     }
+        //                 })()
+        //             ].main;
+        //         case false:
+        //             return theme.colors.palette.light.main;
+        //     }
+        // })();
 
         return {
             "root": (() => {
                 const hoverBackgroundColor =
-                    theme.colors.useCases.buttons[
-                        (() => {
-                            switch (variant) {
-                                case "primary":
-                                    return "actionHoverPrimary";
-                                case "secondary":
-                                case "ternary":
-                                    return "actionHoverSecondary";
-                            }
-                        })()
-                    ];
+                    theme.colors.useCases.negative["dark"]; //TODO See with MARC
 
                 const paddingSpacingTopBottom = 2;
 
@@ -214,8 +213,10 @@ export function createButton<IconId extends string = never>(params?: {
                     switch (variant) {
                         case "primary":
                         case "secondary":
-                            return 2;
                         case "ternary":
+                            return 1;
+                        case "borderless":
+                        case "transparent":
                             return 0;
                     }
                 })();
@@ -228,20 +229,29 @@ export function createButton<IconId extends string = never>(params?: {
                             .style.lineHeight,
                     );
 
+                const backgroundColor = (() => {
+                    switch (variant) {
+                        case "primary":
+                            return theme.colors.useCases.accent.main;
+                        case "secondary":
+                            return theme.colors.useCases.surfaces.tertiary;
+                        case "ternary":
+                            return theme.colors.useCases.other.buttonSurface;
+                        case "borderless":
+                            return theme.colors.useCases.surfaces.secondary;
+                        case "transparent":
+                            return theme.colors.useCases.other.buttonSurface2;
+                    }
+                })();
+
                 return {
                     "textTransform": "unset" as const,
                     "backgroundColor": disabled
-                        ? theme.colors.useCases.buttons.actionDisabledBackground
-                        : (() => {
-                              switch (variant) {
-                                  case "primary":
-                                  case "secondary":
-                                      return "transparent";
-                                  case "ternary":
-                                      return theme.colors.useCases.surfaces
-                                          .primary;
-                              }
-                          })(),
+                        ? changeColorOpacity({
+                              "color": backgroundColor,
+                              "opacity": 0.3,
+                          })
+                        : backgroundColor,
                     "borderRadius": approxHeight / 2,
                     borderWidth,
                     "borderStyle": "solid",
@@ -267,15 +277,15 @@ export function createButton<IconId extends string = never>(params?: {
                     "&.MuiButton-text": {
                         "color": textColor,
                     },
-                    "&:hover": {
-                        "backgroundColor": hoverBackgroundColor,
-                        "& .MuiSvgIcon-root": {
-                            "color": hoverTextColor,
-                        },
-                        "&.MuiButton-text": {
-                            "color": hoverTextColor,
-                        },
-                    },
+                    // "&:hover": {
+                    //     "backgroundColor": hoverBackgroundColor,
+                    //     "& .MuiSvgIcon-root": {
+                    //         "color": hoverTextColor,
+                    //     },
+                    //     "&.MuiButton-text": {
+                    //         "color": hoverTextColor,
+                    //     },
+                    // },
 
                     //NOTE: If the position of the button is relative (the default)
                     //it goes hover everything not positioned, we have to mess with z-index and

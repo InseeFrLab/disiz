@@ -8,10 +8,13 @@ export {
     defaultPalette,
     createDefaultColorUseCases,
     changeColorOpacity,
-    useIsDarkModeEnabled,
     getIsDarkModeEnabledOsDefault,
-    evtIsDarkModeEnabled,
 } from "./color";
+
+export {
+    useIsDarkModeEnabled,
+    evtIsDarkModeEnabled,
+} from "./useIsDarkModeEnabled";
 
 export type {
     TypographyDesc,

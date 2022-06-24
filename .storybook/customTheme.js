@@ -4,9 +4,9 @@ import { create } from "@storybook/theming";
 export default create({
   
   "base": "light",
-  "brandTitle": 'Onyxia UI',
+  "brandTitle": 'Disiz UI',
   "brandUrl": "https://github.com/InseeFrLab/disiz",
-  "brandImage": "/onyxiaLogo.png",
+  "brandImage": "/onyxiaLogo.png", //TODO ADD disiz logo
 
   // Toolbar default and active colors
   //"barTextColor": 'pink',

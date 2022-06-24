@@ -14,7 +14,7 @@
     <img src="https://img.shields.io/npm/l/disiz">
 </p>
 <p align="center">
-  <a href="https://ui.onyxia.dev">Documentation</a>
+  <a href="TO CHANGE">Documentation</a>
 </p>
 
 Default design system carefully crafted by [Marc Hufschmitt](http://marchufschmitt.fr/)
@@ -56,8 +56,6 @@ If you want to experiment with it you can run the demo app with:
 NOTE for [Storybook](https://storybook.js.org) users: As of writing this lines storybook still uses by default emotion 10.  
 mui and TSS runs emotion 11 so there is [some changes](https://github.com/InseeFrLab/disiz/blob/9f58cfffb3483f26d5b0218189ad8cc2f7f89df9/.storybook/main.js#L31-L32)
 to be made to your `.storybook/main.js` to make it uses emotion 11.
-
-[Launch dev environement](https://datalab.sspcloud.fr/launcher/inseefrlab-helm-charts-datascience/vscode?autoLaunch=true&onyxia.friendlyName=«disiz»&onyxia.share=true&s3.enabled=false&kubernetes.role=«admin»&security.allowlist.enabled=false&git.repository=«https%3A%2F%2Fgithub.com%2FInseeFrLab%2Fdisiz»&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fdisiz%2Fmain%2Fonyxia-init.sh»)
 
 ```bash
 git clone https://github.com/InseeFrLab/disiz
