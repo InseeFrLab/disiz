@@ -55,7 +55,7 @@ export function createButtonBar<IconId extends string = never>(params: {
 
     const useStyles = makeStyles({ "name": { ButtonBar } })(theme => ({
         "root": {
-            "backgroundColor": theme.colors.useCases.surfaces.surface1,
+            "backgroundColor": theme.colors.useCases.surfaces.primary,
             "boxShadow": theme.shadows[1],
             "borderRadius": 8,
             "overflow": "hidden",

@@ -68,7 +68,7 @@ export function createButtonBarButton<IconId extends string = never>(params: {
             },
             "&:hover.MuiButton-text": {
                 "color": theme.colors.useCases.typography.textPrimary,
-                "borderBottomColor": theme.colors.useCases.buttons.actionActive,
+                "borderBottomColor": theme.colors.useCases.accent.main,
                 "boxSizing": "border-box",
                 "backgroundColor": "unset",
                 "& .MuiSvgIcon-root": {
