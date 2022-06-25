@@ -40,13 +40,13 @@ export type IconProps<IconId extends string = string> = {
     onClick?: MouseEventHandler<SVGSVGElement>;
 };
 
-type MuiIconLike = (props: {
+export type MuiIconLike = (props: {
     ref: ForwardedRef<SVGSVGElement>;
     className: string;
     onClick?: MouseEventHandler<SVGSVGElement>;
 }) => JSX.Element;
 
-type SvgComponentLike = ElementType;
+export type SvgComponentLike = ElementType;
 
 function isMuiIcon(
     Component: MuiIconLike | SvgComponentLike,
@@ -79,8 +79,6 @@ export function createIcon<IconId extends string>(componentByIconId: {
                 className,
                 size = "default",
                 onClick,
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                children,
                 ...rest
             } = props;
 
