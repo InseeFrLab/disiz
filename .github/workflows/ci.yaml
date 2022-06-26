@@ -71,7 +71,7 @@ jobs:
               with:
                   node-version: "16"
             - uses: bahmutov/npm-install@v1
-            - run: npx build-storybook --static-dir ./.storybook/static --output-dir ./build_storybook
+            - run: npx build-storybook --output-dir ./build_storybook
             # - run: echo "ui.onyxia.dev" > build_storybook/CNAME
             - run: git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${{github.repository}}.git
               env:
@@ -108,7 +108,7 @@ jobs:
               env:
                   FROM_VERSION: ${{ needs.check_if_version_upgraded.outputs.from_version }}
                   TO_VERSION: ${{ needs.check_if_version_upgraded.outputs.to_version }}
-            - uses: InseeFrLab/action-gh-release@v0.2.0
+            - uses: garronej/action-gh-release@v0.2.0
               with:
                   name: Release v${{ needs.check_if_version_upgraded.outputs.to_version }}
                   tag_name: v${{ needs.check_if_version_upgraded.outputs.to_version }}
