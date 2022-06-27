@@ -428,9 +428,8 @@ export const { createMuiTypographyOptions, getComputedTypography } = (() => {
             return {
                 "fontFamily": variantFontFamily ?? fontFamily,
                 fontWeight,
-                //NOTE: We put as any because we use TS 4.2.2 for Storybook but with newer version is not necessary.
-                "fontSize": `${fontSizeRem * rootFontSizePx}px` as any,
-                "lineHeight": `${lineHeightRem * rootFontSizePx}px` as any,
+                "fontSize": `${fontSizeRem * rootFontSizePx}px`,
+                "lineHeight": `${lineHeightRem * rootFontSizePx}px`,
             };
         }
 

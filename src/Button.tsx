@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import type { FC } from "react";
-import { forwardRef, memo } from "react";
+import { forwardRef, memo, useState } from "react";
 import { makeStyles } from "./lib/ThemeProvider";
 import type { IconProps } from "./Icon";
 import { id } from "tsafe/id";
@@ -10,9 +10,9 @@ import { capitalize } from "tsafe/capitalize";
 import { assert } from "tsafe";
 import type { Equals } from "tsafe/Equals";
 import { breakpointsValues } from "./lib/breakpoints";
-import { variantNameUsedForMuiButton } from "./lib/typography";
-import { pxToNumber } from "./tools/pxToNumber";
+import { useCallbackFactory } from "powerhooks/useCallbackFactory";
 import { changeColorOpacity } from "./lib";
+import * as runExclusive from "run-exclusive";
 
 export type ButtonProps<IconId extends string = never> =
     | ButtonProps.Regular<IconId>
@@ -23,12 +23,7 @@ export namespace ButtonProps {
         className?: string;
 
         /** Defaults to "primary" */
-        variant?:
-            | "primary"
-            | "secondary"
-            | "ternary"
-            | "borderless"
-            | "transparent";
+        variant?: "primary" | "secondary" | "tertiary" | "quatertiary";
 
         children: React.ReactNode;
 
@@ -85,9 +80,27 @@ export function createButton<IconId extends string = never>(params?: {
                 ...rest
             } = props;
 
+            const [isMouseIn, setIsMouseIn] = useState(false);
+
+            const handleMousePositionFactory = useCallbackFactory(
+                runExclusive.build(async ([position]: ["in" | "out"]) => {
+                    switch (position) {
+                        case "in":
+                            setIsMouseIn(true);
+                            return;
+                        case "out":
+                            await new Promise<void>(resolve =>
+                                setTimeout(resolve, 400),
+                            );
+                            setIsMouseIn(false);
+                    }
+                }),
+            );
+
             const { classes, cx } = useStyles({
                 variant,
                 disabled,
+                isMouseIn,
             });
 
             const IconWd = useGuaranteedMemo(
@@ -104,6 +117,8 @@ export function createButton<IconId extends string = never>(params?: {
 
             return (
                 <MuiButton
+                    onMouseEnter={handleMousePositionFactory("in")}
+                    onMouseLeave={handleMousePositionFactory("out")}
                     ref={ref}
                     className={cx(classes.root, className)}
                     //There is an error in @mui/material types, this should be correct.
@@ -162,72 +177,38 @@ export function createButton<IconId extends string = never>(params?: {
     const useStyles = makeStyles<{
         variant: NonNullable<ButtonProps["variant"]>;
         disabled: boolean;
-    }>({ "name": { Button } })((theme, { variant, disabled }) => {
+        isMouseIn: boolean;
+    }>({ "name": { Button } })((theme, { variant, disabled, isMouseIn }) => {
         const textColor =
             theme.colors.useCases.typography[
-                disabled
-                    ? "textDisabled"
-                    : (() => {
-                          switch (variant) {
-                              case "transparent":
-                              case "ternary":
-                                  return "textFocus";
-                              case "primary":
-                                  return "textPrimary";
-                              case "secondary":
-                              case "borderless":
-                                  return "textPrimary";
-                          }
-                      })()
+                (() => {
+                    switch (variant) {
+                        case "tertiary":
+                            return "button2";
+                        case "primary":
+                            return "button1";
+                        case "secondary":
+                            return "secondary";
+                        case "quatertiary":
+                            return "primary";
+                    }
+                })()
             ];
-
-        // const hoverTextColor = (() => {
-        //     switch (theme.isDarkModeEnabled) {
-        //         case true:
-        //             return theme.colors.palette[
-        //                 (() => {
-        //                     switch (variant) {
-        //                         case "primary":
-        //                             return "light";
-        //                         case "secondary":
-        //                         case "ternary":
-        //                         case "borderless":
-        //                         case "transparent"
-        //                                 return "dark";
-        //                     }
-        //                 })()
-        //             ].main;
-        //         case false:
-        //             return theme.colors.palette.light.main;
-        //     }
-        // })();
 
         return {
             "root": (() => {
-                const hoverBackgroundColor =
-                    theme.colors.useCases.negative["dark"]; //TODO See with MARC
-
-                const paddingSpacingTopBottom = 2;
-
-                const borderWidth = (() => {
+                const hoverBackgroundColor = (() => {
                     switch (variant) {
                         case "primary":
+                            return theme.colors.useCases.accent.dark;
                         case "secondary":
-                        case "ternary":
-                            return 1;
-                        case "borderless":
-                        case "transparent":
-                            return 0;
+                            return theme.colors.useCases.surfaces.secondary;
+                        case "tertiary":
+                            return theme.colors.useCases.surfaces.button2;
+                        case "quatertiary":
+                            return theme.colors.useCases.surfaces.tertiary;
                     }
                 })();
-
-                const approxHeight =
-                    2 * theme.spacing(paddingSpacingTopBottom) +
-                    2 * borderWidth +
-                    pxToNumber(
-                        theme.typography.variants[variantNameUsedForMuiButton]
-                            .style.lineHeight,
-                    );
 
                 const backgroundColor = (() => {
                     switch (variant) {
@@ -235,12 +216,10 @@ export function createButton<IconId extends string = never>(params?: {
                             return theme.colors.useCases.accent.main;
                         case "secondary":
                             return theme.colors.useCases.surfaces.tertiary;
-                        case "ternary":
-                            return theme.colors.useCases.other.buttonSurface;
-                        case "borderless":
+                        case "tertiary":
+                            return theme.colors.useCases.surfaces.button1;
+                        case "quatertiary":
                             return theme.colors.useCases.surfaces.secondary;
-                        case "transparent":
-                            return theme.colors.useCases.other.buttonSurface2;
                     }
                 })();
 
@@ -252,16 +231,7 @@ export function createButton<IconId extends string = never>(params?: {
                               "opacity": 0.3,
                           })
                         : backgroundColor,
-                    "borderRadius": approxHeight / 2,
-                    borderWidth,
-                    "borderStyle": "solid",
-                    "borderColor": disabled
-                        ? "transparent"
-                        : hoverBackgroundColor,
-                    ...theme.spacing.topBottom(
-                        "padding",
-                        paddingSpacingTopBottom,
-                    ),
+                    "borderRadius": "4px",
                     ...theme.spacing.rightLeft(
                         "padding",
                         (() => {
@@ -277,52 +247,19 @@ export function createButton<IconId extends string = never>(params?: {
                     "&.MuiButton-text": {
                         "color": textColor,
                     },
-                    // "&:hover": {
-                    //     "backgroundColor": hoverBackgroundColor,
-                    //     "& .MuiSvgIcon-root": {
-                    //         "color": hoverTextColor,
-                    //     },
-                    //     "&.MuiButton-text": {
-                    //         "color": hoverTextColor,
-                    //     },
-                    // },
 
-                    //NOTE: If the position of the button is relative (the default)
-                    //it goes hover everything not positioned, we have to mess with z-index and
-                    //we don't want that.
-                    //The relative positioning is needed for the touch ripple effect.
-                    //If we dont have position relative the effect is not restricted to the
-                    //button: https://user-images.githubusercontent.com/6702424/157982515-c97dfa81-b09a-4323-beb9-d1e92e7ebe4d.mov
-                    //The solution is set 'position: relative' only when the ripple effect is supposed to be visible.
-                    //This explain the following awful rules.
-                    //The expected result is: https://user-images.githubusercontent.com/6702424/157984062-27e544c3-f86f-47b8-b141-c5f61b8a2880.mov
-                    "position": "unset",
+                    "position": isMouseIn ? "relative" : "unset",
                     "& .MuiTouchRipple-root": {
-                        "display": "none",
+                        "display": isMouseIn ? "unset" : "none",
                     },
-                    "&:active": {
-                        "position": "relative",
-                        "& .MuiTouchRipple-root": {
-                            "display": "unset",
-                        },
-                    },
-                    "&:focus": {
-                        "position": "relative",
-                        "& .MuiTouchRipple-root": {
-                            "display": "unset",
-                        },
-                        "&:hover": {
-                            "position": "unset",
-                            "& .MuiTouchRipple-root": {
-                                "display": "none",
-                            },
-                            "&:active": {
-                                "position": "relative",
-                                "& .MuiTouchRipple-root": {
-                                    "display": "unset",
-                                },
-                            },
-                        },
+                    "&:hover": {
+                        "backgroundColor": hoverBackgroundColor,
+                        // "& .MuiSvgIcon-root": {
+                        //     "color": hoverTextColor,
+                        // },
+                        // "&.MuiButton-text": {
+                        //     "color": hoverTextColor,
+                        // },
                     },
                 } as const;
             })(),

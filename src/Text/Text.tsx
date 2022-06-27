@@ -22,7 +22,7 @@ export function createText<
     type TextProps = {
         className?: string | null;
         typo: TypographyVariantNameCustom | TypographyDesc.VariantNameBase;
-        color?: "primary" | "secondary" | "disabled" | "focus";
+        color?: "primary" | "secondary" | "tertiary" | "hint";
         children: NonNullable<React.ReactNode>;
         htmlComponent?: TypographyDesc.HtmlComponent;
         componentProps?: JSX.IntrinsicElements[TypographyDesc.HtmlComponent];
@@ -104,21 +104,7 @@ export function createText<
         ) => ({
             "root": {
                 ...theme.typography.variants[typo].style,
-                "color":
-                    theme.colors.useCases.typography[
-                        (() => {
-                            switch (color) {
-                                case "primary":
-                                    return "textPrimary";
-                                case "secondary":
-                                    return "textSecondary";
-                                case "disabled":
-                                    return "textDisabled";
-                                case "focus":
-                                    return "textFocus";
-                            }
-                        })()
-                    ],
+                "color": theme.colors.useCases.typography[color],
                 "padding": 0,
                 "margin": 0,
                 ...(!fixedSize_enabled

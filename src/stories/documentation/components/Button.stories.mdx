@@ -37,7 +37,7 @@ The button is made up of the following elements:
 
 - [Primary button](#primary-button)
 - [Secondary button](#secondary-button)
-- [Ternary button](#ternary-button)
+- [Ternary button](#tertiary-button)
 - [Disabled status](#disabled-status)
 - [Buttons with icon](#buttons-with-icon)
 
@@ -89,7 +89,7 @@ such as canceling, rewinding or resetting values ​​on a form.
 
 ### Ternary button
 
-The ternary button is a third level of action, more rare, 
+The tertiary button is a third level of action, more rare, 
 is used for external links or resetting values ​​on a form.
 
 <Canvas>
@@ -98,7 +98,7 @@ is used for external links or resetting values ​​on a form.
 			<Fragment key={dark}>
 				     <div className={css({ "margin": 20})} />
 				<StoryProvider dark={dark}>
-					<Button href="#" variant="ternary">Button text</Button>
+					<Button href="#" variant="tertiary">Button text</Button>
 				</StoryProvider>
 			</Fragment>
 		)}
@@ -106,7 +106,7 @@ is used for external links or resetting values ​​on a form.
 </Canvas>
 
 ```tsx
-<Button href="#" variant="ternary">Button text</Button>
+<Button href="#" variant="tertiary">Button text</Button>
 ```
 
 ### Disabled status

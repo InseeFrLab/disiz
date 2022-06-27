@@ -110,30 +110,22 @@ export function createDefaultColorUseCases(
             "primary": palette.inseeGray[isDarkModeEnabled ? "900" : "100"],
             "secondary": palette.inseeGray[isDarkModeEnabled ? "800" : "white"],
             "tertiary": palette.inseeGray[isDarkModeEnabled ? "700" : "200"],
-        },
-        "typography": {
-            "textPrimary": isDarkModeEnabled
+            "button1": isDarkModeEnabled
                 ? palette.inseeGray["100"]
                 : palette.inseeBlue["700"],
-            "textSecondary":
-                palette.inseeGray[isDarkModeEnabled ? "300" : "700"],
-            "textTertiary":
-                palette.inseeGray[isDarkModeEnabled ? "500" : "600"],
-            "textDisabled":
-                palette.inseeGray[isDarkModeEnabled ? "600" : "400"],
-            "textFocus": palette.inseeGray[isDarkModeEnabled ? "800" : "500"],
-            "buttonText": isDarkModeEnabled
-                ? palette.inseeBlue["700"]
-                : palette.inseeGray["100"],
-        },
-        "other": {
-            "buttonSurface": isDarkModeEnabled
-                ? palette.inseeGray["100"]
-                : palette.inseeBlue["700"],
-            "buttonSurface2": isDarkModeEnabled
+            "button2": isDarkModeEnabled
                 ? palette.inseeGray["400"]
                 : palette.inseeBlue["900"],
-            "buttonText": isDarkModeEnabled
+        },
+        "typography": {
+            "primary": isDarkModeEnabled
+                ? palette.inseeGray["100"]
+                : palette.inseeBlue["700"],
+            "secondary": palette.inseeGray[isDarkModeEnabled ? "300" : "700"],
+            "tertiary": palette.inseeGray[isDarkModeEnabled ? "500" : "600"],
+            "hint": palette.inseeGray[isDarkModeEnabled ? "600" : "400"],
+            "button1": palette.inseeBlue["700"],
+            "button2": isDarkModeEnabled
                 ? palette.inseeBlue["700"]
                 : palette.inseeGray["100"],
         },
@@ -211,35 +203,35 @@ export function createMuiPaletteOptions(params: {
             "light": useCases.accent.light,
         },
         "secondary": {
-            "main": useCases.typography.textPrimary,
-            "light": useCases.typography.textSecondary,
+            "main": useCases.typography.primary,
+            "light": useCases.typography.secondary,
         },
         "error": {
             "light": useCases.negative.background,
             "main": useCases.negative.main,
-            "contrastText": useCases.typography.textPrimary,
+            "contrastText": useCases.typography.primary,
         },
         "success": {
             "light": useCases.positive.background,
             "main": useCases.positive.main,
-            "contrastText": useCases.typography.textPrimary,
+            "contrastText": useCases.typography.primary,
         },
         "info": {
             "light": useCases.info.background,
             "main": useCases.info.main,
-            "contrastText": useCases.typography.textPrimary,
+            "contrastText": useCases.typography.primary,
         },
         "warning": {
             "light": useCases.warning.background,
             "main": useCases.warning.main,
-            "contrastText": useCases.typography.textPrimary,
+            "contrastText": useCases.typography.primary,
         },
         "text": {
-            "primary": useCases.typography.textPrimary,
-            "secondary": useCases.typography.textSecondary,
-            "disabled": useCases.typography.textDisabled,
+            "primary": useCases.typography.primary,
+            "secondary": useCases.typography.secondary,
+            "disabled": useCases.typography.hint,
         },
-        "divider": useCases.typography.textPrimary,
+        "divider": useCases.typography.primary,
         "background": {
             "paper": useCases.surfaces.secondary,
             "default": useCases.surfaces.primary,
