@@ -6,13 +6,7 @@ const { meta, getStory } = getStoryFactory({
     sectionName,
     "argTypes": {
         "variant": {
-            "options": [
-                "primary",
-                "secondary",
-                "tertiary",
-                "borderless",
-                "transparent",
-            ],
+            "options": ["primary", "secondary", "tertiary", "quatertiary"],
             "control": { "type": "radio" },
         },
         "disabled": { "control": { "type": "boolean" } },

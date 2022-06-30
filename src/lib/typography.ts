@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import type { TypographyOptions as MuiTypographyOptions } from "@mui/material/styles/createTypography";
 import { id } from "tsafe/id";
 import { breakpointsValues } from "./breakpoints";
@@ -34,26 +33,31 @@ export declare namespace TypographyDesc {
     }
 
     export type VariantNameBase =
-        | "display heading"
-        | "page heading"
-        | "subtitle"
-        | "section heading"
-        | "object heading"
-        | "label 1"
-        | "label 2"
-        | "navigation label"
-        | "body 1"
-        | "body 2"
-        | "body 3"
-        | "caption";
+        | "heading xl"
+        | "heading l"
+        | "heading m"
+        | "heading s"
+        | "heading xs"
+        | "paragraph xl medium"
+        | "paragraph xl semibold"
+        | "paragraph l medium"
+        | "paragraph l semibold"
+        | "paragraph m medium"
+        | "paragraph m semibold"
+        | "paragraph s medium"
+        | "paragraph s semibold"
+        | "paragraph xs medium"
+        | "paragraph xs semibold";
 
     export type FontWeightProperty =
         | FontWeightProperty.Globals
         | FontWeightProperty.FontWeightAbsolute
         | "bolder"
         | "lighter";
+
     export namespace FontWeightProperty {
         export type FontWeightAbsolute = number | "bold" | "normal";
+
         export type Globals =
             | "-moz-initial"
             | "inherit"
@@ -99,298 +103,117 @@ export const defaultGetTypographyDesc: GetTypographyDesc<never> = ({
     "fontFamily": "sans-serif",
     "rootFontSizePx": 16 * browserFontSizeFactor,
     "variants": {
-        "display heading": {
+        "heading xl": {
             "htmlComponent": "h1",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("bold"),
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(800),
             ...(() => {
+                //TODO -> Size with diffrent size go FIGMA
                 if (windowInnerWidth >= breakpointsValues.xl) {
                     return {
-                        "fontSizeRem": 2.8,
-                        "lineHeightRem": 3.25,
+                        "fontSizeRem": 3,
+                        "lineHeightRem": 3.5,
                     };
                 }
-
                 if (windowInnerWidth >= breakpointsValues.lg) {
                     return {
-                        "fontSizeRem": 2.25,
-                        "lineHeightRem": 2.5,
+                        "fontSizeRem": 3,
+                        "lineHeightRem": 3.5,
                     };
                 }
-
                 return {
-                    "fontSizeRem": 1.75,
-                    "lineHeightRem": 2.5,
+                    "fontSizeRem": 3,
+                    "lineHeightRem": 3.5,
                 };
             })(),
         },
-        "page heading": {
+
+        "heading l": {
             "htmlComponent": "h2",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("bold"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 2.25,
-                        "lineHeightRem": 2.5,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 1.75,
-                        "lineHeightRem": 2.25,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 1.125,
-                    "lineHeightRem": 1.25,
-                };
-            })(),
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(800),
+            "fontSizeRem": 2.25,
+            "lineHeightRem": 3,
         },
-        "subtitle": {
+
+        "heading m": {
             "htmlComponent": "h3",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("normal"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1.75,
-                        "lineHeightRem": 2.25,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 1.5,
-                        "lineHeightRem": 2,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 1,
-                    "lineHeightRem": 1.475,
-                };
-            })(),
+            "fontWeight": id<TypographyDesc.FontWeightProperty>("bold"),
+            "fontSizeRem": 1.75,
+            "lineHeightRem": 2.25,
         },
-        "section heading": {
+        "heading s": {
             "htmlComponent": "h4",
             "fontWeight": id<TypographyDesc.FontWeightProperty>("bold"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1.5,
-                        "lineHeightRem": 2,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 1.25,
-                        "lineHeightRem": 1.7,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.875,
-                    "lineHeightRem": 1.28,
-                };
-            })(),
+            "fontSizeRem": 1.5,
+            "lineHeightRem": 1.75,
         },
-        "object heading": {
+        "heading xs": {
             "htmlComponent": "h5",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>("bold"),
+            "fontSizeRem": 1.25,
+            "lineHeightRem": 1.5,
+        },
+        "paragraph xl semibold": {
+            "htmlComponent": "h6",
             "fontWeight": id<TypographyDesc.FontWeightProperty>(600),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1.25,
-                        "lineHeightRem": 1.7,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 1.125,
-                        "lineHeightRem": 1.25,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.875,
-                    "lineHeightRem": 1.28,
-                };
-            })(),
+            "fontSizeRem": 1.25,
+            "lineHeightRem": 1.5,
         },
-        "navigation label": {
-            "htmlComponent": "h5",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1.25,
-                        "lineHeightRem": 1.7,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 1.125,
-                        "lineHeightRem": 1.25,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.875,
-                    "lineHeightRem": 1.28,
-                };
-            })(),
-        },
-        "label 1": {
+        "paragraph xl medium": {
             "htmlComponent": "h6",
             "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1,
-                        "lineHeightRem": 1.475,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.875,
-                        "lineHeightRem": 1.28,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.75,
-                    "lineHeightRem": 1,
-                };
-            })(),
+            "fontSizeRem": 1.25,
+            "lineHeightRem": 1.5,
         },
-        "label 2": {
-            "htmlComponent": "h6",
+        "paragraph l semibold": {
+            "htmlComponent": "span",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(600),
+            "fontSizeRem": 1.125,
+            "lineHeightRem": 1.375,
+        },
+        "paragraph l medium": {
+            "htmlComponent": "p",
             "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 0.875,
-                        "lineHeightRem": 1.28,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.75,
-                        "lineHeightRem": 1,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.625,
-                    "lineHeightRem": 0.69,
-                };
-            })(),
+            "fontSizeRem": 1.125,
+            "lineHeightRem": 1.375,
         },
-        "body 1": {
-            "htmlComponent": "p",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("normal"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 1,
-                        "lineHeightRem": 1.475,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.875,
-                        "lineHeightRem": 1.28,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.75,
-                    "lineHeightRem": 1,
-                };
-            })(),
+        "paragraph m semibold": {
+            "htmlComponent": "span",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(600),
+            "fontSizeRem": 1,
+            "lineHeightRem": 1.25,
         },
-        "body 2": {
+        "paragraph m medium": {
             "htmlComponent": "p",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("normal"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 0.875,
-                        "lineHeightRem": 1.28,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.75,
-                        "lineHeightRem": 1,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.625,
-                    "lineHeightRem": 0.69,
-                };
-            })(),
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
+            "fontSizeRem": 1,
+            "lineHeightRem": 1.25,
         },
-        "body 3": {
-            "htmlComponent": "p",
-            "fontWeight": "normal",
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 0.875,
-                        "lineHeightRem": 1.28,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.75,
-                        "lineHeightRem": 1,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.625,
-                    "lineHeightRem": 0.69,
-                };
-            })(),
+        "paragraph s semibold": {
+            "htmlComponent": "span",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(600),
+            "fontSizeRem": 0.875,
+            "lineHeightRem": 1.125,
         },
-        "caption": {
+        "paragraph s medium": {
             "htmlComponent": "p",
-            "fontWeight": id<TypographyDesc.FontWeightProperty>("normal"),
-            ...(() => {
-                if (windowInnerWidth >= breakpointsValues.xl) {
-                    return {
-                        "fontSizeRem": 0.75,
-                        "lineHeightRem": 1,
-                    };
-                }
-
-                if (windowInnerWidth >= breakpointsValues.lg) {
-                    return {
-                        "fontSizeRem": 0.625,
-                        "lineHeightRem": 0.69,
-                    };
-                }
-
-                return {
-                    "fontSizeRem": 0.45,
-                    "lineHeightRem": 0.75,
-                };
-            })(),
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
+            "fontSizeRem": 0.875,
+            "lineHeightRem": 1.125,
+        },
+        "paragraph xs semibold": {
+            "htmlComponent": "span",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(600),
+            "fontSizeRem": 0.75,
+            "lineHeightRem": 1,
+        },
+        "paragraph xs medium": {
+            "htmlComponent": "p",
+            "fontWeight": id<TypographyDesc.FontWeightProperty>(500),
+            "fontSizeRem": 0.75,
+            "lineHeightRem": 1,
         },
     },
 });
-
-export const variantNameUsedForMuiButton = "label 1";
 
 export const { createMuiTypographyOptions, getComputedTypography } = (() => {
     type TypographyDescLike<CustomVariantName extends string> = {
@@ -477,28 +300,36 @@ export const { createMuiTypographyOptions, getComputedTypography } = (() => {
             "fontWeightRegular": "normal",
             "fontWeightMedium": 500,
             "h1": getTypographyVariantStyle({
-                "variantName": "display heading",
+                "variantName": "heading l",
             }),
-            "h2": getTypographyVariantStyle({ "variantName": "page heading" }),
-            "h3": getTypographyVariantStyle({ "variantName": "subtitle" }),
+            "h2": getTypographyVariantStyle({ "variantName": "heading l" }),
+            "h3": getTypographyVariantStyle({ "variantName": "heading m" }),
             "h4": getTypographyVariantStyle({
-                "variantName": "section heading",
+                "variantName": "heading s",
             }),
             "h5": getTypographyVariantStyle({
-                "variantName": "object heading",
+                "variantName": "heading xs",
             }),
             "h6": getTypographyVariantStyle({
-                "variantName": "navigation label",
+                "variantName": "paragraph xl medium",
             }),
             "subtitle1": getTypographyVariantStyle({
-                "variantName": "label 1",
+                "variantName": "paragraph l semibold",
             }),
-            "subtitle2": getTypographyVariantStyle({ "variantName": "body 2" }),
-            "body1": getTypographyVariantStyle({ "variantName": "body 1" }),
-            "body2": getTypographyVariantStyle({ "variantName": "body 2" }),
-            "caption": getTypographyVariantStyle({ "variantName": "caption" }),
+            "subtitle2": getTypographyVariantStyle({
+                "variantName": "paragraph l medium",
+            }),
+            "body1": getTypographyVariantStyle({
+                "variantName": "paragraph m medium",
+            }),
+            "body2": getTypographyVariantStyle({
+                "variantName": "paragraph s medium",
+            }),
+            "caption": getTypographyVariantStyle({
+                "variantName": "paragraph xs medium",
+            }),
             "button": getTypographyVariantStyle({
-                "variantName": variantNameUsedForMuiButton,
+                "variantName": "paragraph xl semibold",
             }),
         };
     }

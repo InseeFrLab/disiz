@@ -57,7 +57,7 @@ export function getStoryFactory<Props extends Record<string, any>>(params: {
         }, [windowInnerWidth]);
 
         return (
-            <Text typo="body 1">
+            <Text typo="paragraph l medium">
                 {windowInnerWidth}px width: {range}
             </Text>
         );

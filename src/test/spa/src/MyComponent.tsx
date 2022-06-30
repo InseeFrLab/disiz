@@ -10,7 +10,7 @@ import Switch from "@mui/material/Switch";
 import { useSplashScreen, useIsDarkModeEnabled } from "disiz";
 
 //See: https://github.com/InseeFrLab/tss-react
-const useStyles= makeStyles()(theme => ({
+const useStyles = makeStyles()(theme => ({
     "root": {
         "backgroundColor": theme.colors.useCases.surfaces.background,
         /*
@@ -34,7 +34,7 @@ export function MyComponent() {
             //Call this when your component is in a state ready to be shown
             hideRootSplashScreen();
 
-        // eslint-disable-next-line
+            // eslint-disable-next-line
         }, []);
     }
 
@@ -52,7 +52,7 @@ export function MyComponent() {
             } else {
                 hideSplashScreen();
             }
-        // eslint-disable-next-line
+            // eslint-disable-next-line
         }, [isLoading]);
     }
 
@@ -65,14 +65,14 @@ export function MyComponent() {
                 <Icon iconId="hello" />
                 Hello World
             </Text>
-            <Text typo="display heading">Display heading with Marianne font</Text>
-            <Text typo="body 1">Toggle dark mode</Text>
+            <Text typo="heading l">Display heading with Marianne font</Text>
+            <Text typo="paragraph l medium">Toggle dark mode</Text>
             <Switch
                 checked={isDarkModeEnabled}
                 onChange={() => setIsDarkModeEnabled(!isDarkModeEnabled)}
             />
             <Button
-                onClick={async ()=> {
+                onClick={async () => {
 
                     setIsLoading(true);
 

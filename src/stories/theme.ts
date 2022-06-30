@@ -24,7 +24,7 @@ export const { ThemeProvider, StoryProvider, useTheme } = createThemeProvider({
             browserFontSizeFactor,
             windowInnerHeight,
         }),
-        "fontFamily": '"Work Sans", sans-serif',
+        "fontFamily": '"Montserrat", sans-serif',
         //"fontFamily": "Marianne, sans-serif",
     }),
 });
