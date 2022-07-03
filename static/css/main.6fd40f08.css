@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: normal; /*400*/
+    src: local("Montserrat"), url(../../2ca169c90e53d1d0480b.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: normal; /*400*/
+    src: local("Montserrat"), url(../../83bfa37caed10df34bc2.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 250;
+    src: local("Montserrat"), url(../../2fb0d38ac7971270e302.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 250;
+    src: local("Montserrat"), url(../../07073838959a354d99c1.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 275;
+    src: local("Montserrat"), url(../../cdbd86597a115565528e.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 275;
+    src: local("Montserrat"),
+        url(../../3cd505e52cdc5357abd8.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 300;
+    src: local("Montserrat"), url(../../df75a5aea067f7b1d014.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 300;
+    src: local("Montserrat"),
+        url(../../80708ae2e8dfa6899a5f.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: medium; /*500*/
+    src: local("Montserrat"), url(../../ff93faa1ec704c321dea.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: medium; /*500*/
+    src: local("Montserrat"),
+        url(../../e5b5315aeec8c6bc62c9.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    src: local("Montserrat"), url(../../cdffefafe4a4c52c5dea.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 600;
+    src: local("Montserrat"),
+        url(../../06b9e3d89218b9dc5069.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: bold; /*700*/
+    src: local("Montserrat"), url(../../12ba843c75312dd308b0.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight:  bold; /*700*/
+    src: local("Montserrat"), url(../../1be59373702bc00dd9d5.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 800;
+    src: local("Montserrat"), url(../../654b3d7eb08497b3a6ac.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 800;
+    src: local("Montserrat"),
+        url(../../64bdbbf8465425d4bf81.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 900;
+    src: local("Montserrat"), url(../../c3c6001eee0c75a7dcc2.woff) format("woff");
+}
+@font-face {
+    font-family: "Montserrat";
+    font-style: italic;
+    font-weight: 900;
+    src: local("Montserrat"),
+        url(../../98177d163f74efb86932.woff) format("woff");
+}
+
+
+/*# sourceMappingURL=main.6fd40f08.css.map*/
