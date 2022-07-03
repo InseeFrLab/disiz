@@ -101,41 +101,37 @@ export function createText<
                 fixedSize_content,
                 children,
             },
-        ) => {
-            console.log(typo);
-            console.log(theme.typography.variants);
-            return {
-                "root": {
-                    ...theme.typography.variants[typo].style,
-                    "color": theme.colors.useCases.typography[color],
-                    "padding": 0,
-                    "margin": 0,
-                    ...(!fixedSize_enabled
-                        ? {}
-                        : {
-                              "display": "inline-flex",
-                              "flexDirection": "column",
-                              "alignItems": "center",
-                              "justifyContent": "space-between",
-                              "&::after": {
-                                  "content": fixedSize_content
-                                      ? `"${fixedSize_content}"`
-                                      : (assert(children !== undefined),
-                                        `"${children}_"`),
-                                  "height": 0,
-                                  "visibility": "hidden",
-                                  "overflow": "hidden",
-                                  "userSelect": "none",
-                                  "pointerEvents": "none",
-                                  "fontWeight": fixedSize_fontWeight,
-                                  "@media speech": {
-                                      "display": "none",
-                                  },
+        ) => ({
+            "root": {
+                ...theme.typography.variants[typo].style,
+                "color": theme.colors.useCases.typography[color],
+                "padding": 0,
+                "margin": 0,
+                ...(!fixedSize_enabled
+                    ? {}
+                    : {
+                          "display": "inline-flex",
+                          "flexDirection": "column",
+                          "alignItems": "center",
+                          "justifyContent": "space-between",
+                          "&::after": {
+                              "content": fixedSize_content
+                                  ? `"${fixedSize_content}"`
+                                  : (assert(children !== undefined),
+                                    `"${children}_"`),
+                              "height": 0,
+                              "visibility": "hidden",
+                              "overflow": "hidden",
+                              "userSelect": "none",
+                              "pointerEvents": "none",
+                              "fontWeight": fixedSize_fontWeight,
+                              "@media speech": {
+                                  "display": "none",
                               },
-                          }),
-                },
-            };
-        },
+                          },
+                      }),
+            },
+        }),
     );
 
     return { Text };

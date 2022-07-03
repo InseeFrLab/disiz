@@ -1,5 +1,4 @@
-import "../assets/fonts/WorkSans/font.css";
-import "../assets/fonts/Marianne/font.css";
+import "../assets/fonts/Montserrat/font.css";
 import { createThemeProvider, defaultGetTypographyDesc } from "../lib";
 import { createIcon } from "../Icon";
 import { createIconButton } from "../IconButton";
@@ -25,7 +24,6 @@ export const { ThemeProvider, StoryProvider, useTheme } = createThemeProvider({
             windowInnerHeight,
         }),
         "fontFamily": '"Montserrat", sans-serif',
-        //"fontFamily": "Marianne, sans-serif",
     }),
 });
 
