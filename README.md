@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/6702424/120405033-efe83900-c347-11eb-9a7c-7b680c26a18c.png"/>  
+    <img src="https://user-images.githubusercontent.com/81740200/177208651-d30bf0d4-68e6-4fb0-a43d-ef0e84c1cf78.png"/>  
 </p>
 <p align="center">
     <i>A disruptive UI toolkit</i><br>
