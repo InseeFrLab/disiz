@@ -31,7 +31,7 @@ export const lightTheme = create({
     "appContentBg": "#F5F7FA",
     "barBg": "#F5F7FA",
 
-    "colorSecondary": "#0F417A",
+    "colorSecondary": "#3A4657",
 
     "textColor": "#0F417A",
     "textInverseColor": "#ffc0cb",
