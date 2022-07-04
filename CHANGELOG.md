@@ -1,3 +1,9 @@
+### **0.0.4** (2022-07-04)  
+  
+- docs story  
+- upgrade powerhooks and i18nifty  
+- add dark mode in stories    
+  
 ### **0.0.3** (2022-06-30)  
   
 - typography and Montserrat font
