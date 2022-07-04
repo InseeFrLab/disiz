@@ -1,0 +1,104 @@
+import { Meta, ColorPalette, ColorItem, Canvas } from "@storybook/addon-docs";
+import { useDarkMode } from "storybook-dark-mode";
+import { StoryProvider, useTheme } from "../../../theme";
+
+<Meta
+    title="Documentation/Guidelines/Color/Usecases"
+    parameters={{
+        viewMode: "docs",
+        previewTabs: {
+            canvas: { hidden: true },
+        },
+    }}
+/>
+
+# Colors Usecases
+
+---
+
+## Light Theme
+
+### Surfaces
+
+<Canvas>
+    <ColorPalette>
+        <ColorItem
+            title="surfaces.primary"
+            subtitle="Insee Gray 100"
+            colors={[useTheme().colors.palette.inseeGray["100"]]}
+        />
+        <ColorItem
+            title="surfaces.secondary"
+            subtitle="Insee Gray white"
+            colors={[useTheme().colors.palette.inseeGray["white"]]}
+        />
+        <ColorItem
+            title="surfaces.tertiary"
+            subtitle="Insee Gray 200"
+            colors={[useTheme().colors.palette.inseeGray["200"]]}
+        />
+        <ColorItem
+            title="surfaces.button1"
+            subtitle="Insee Bleu 100"
+            colors={[useTheme().colors.palette.inseeBlue["700"]]}
+        />
+        <ColorItem
+            title="surfaces.button2"
+            subtitle="Insee Bleu 900"
+            colors={[useTheme().colors.palette.inseeBlue["900"]]}
+        />
+    </ColorPalette>
+</Canvas>
+
+<Canvas>
+    <ColorPalette>
+        <ColorItem
+            title="surfaces"
+            subtitle="Light"
+            colors={{
+                Primary: useTheme().colors.palette.inseeGray["100"],
+                Secondary: useTheme().colors.palette.inseeGray["white"],
+                Tertiary: useTheme().colors.palette.inseeGray["200"],
+                Button1: useTheme().colors.palette.inseeBlue["700"],
+                Button2: useTheme().colors.palette.inseeBlue["900"]
+                }}
+        />
+    </ColorPalette>
+</Canvas>
+
+### Typography
+
+<Canvas>
+    <ColorPalette>
+        <ColorItem
+            title="typography.primary"
+            subtitle="Insee Bleu 700"
+            colors={[useTheme().colors.palette.inseeBlue["700"]]}
+        />
+        <ColorItem
+            title="typography.secondary"
+            subtitle="Insee Gray 700"
+            colors={[useTheme().colors.palette.inseeGray["700"]]}
+        />
+        <ColorItem
+            title="typography.tertiary"
+            subtitle="Insee Gray 600"
+            colors={[useTheme().colors.palette.inseeGray["600"]]}
+        />
+        <ColorItem
+            title="typography.hint"
+            subtitle="Insee Gray 400"
+            colors={[useTheme().colors.palette.inseeGray["400"]]}
+        />
+        <ColorItem
+            title="typography.button1"
+            subtitle="Insee Bleu 700"
+            colors={[useTheme().colors.palette.inseeBlue["700"]]}
+        />
+        <ColorItem
+            title="typography.button2"
+            subtitle="Insee Gray 100"
+            colors={[useTheme().colors.palette.inseeGray["100"]]}
+        />
+    </ColorPalette>
+</Canvas>

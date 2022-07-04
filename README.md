@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/6702424/120405033-efe83900-c347-11eb-9a7c-7b680c26a18c.png">  
+    <img src="https://user-images.githubusercontent.com/6702424/120405033-efe83900-c347-11eb-9a7c-7b680c26a18c.png"/>  
 </p>
 <p align="center">
     <i>A disruptive UI toolkit</i><br>
@@ -8,13 +8,12 @@
     <i>Compatible with mui large library of components</i>
     <br>
     <br>
-    <img src="https://github.com/InseeFrLab/disiz/workflows/ci/badge.svg?branch=main">
-    <img src="https://img.shields.io/bundlephobia/minzip/disiz">
-    <img src="https://img.shields.io/npm/dw/disiz">
-    <img src="https://img.shields.io/npm/l/disiz">
+    <img src="https://github.com/InseeFrLab/disiz/workflows/ci/badge.svg?branch=main"/>
+    <img src="https://img.shields.io/npm/dw/disiz"/>
+    <img src="https://img.shields.io/npm/l/disiz"/>
 </p>
 <p align="center">
-  <a href="TO CHANGE">Documentation</a>
+  <a href="https://inseefrlab.github.io/disiz/" target="_blank"><img src="https://raw.githubusercontent.com/storybooks/brand/master/badge/badge-storybook.svg"></a>
 </p>
 
 Default design system carefully crafted by [Marc Hufschmitt](http://marchufschmitt.fr/)
