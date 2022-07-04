@@ -1,6 +1,6 @@
 {
     "name": "disiz",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "A uli toolkit, like material-ui but with stronger typing and more opinionated",
     "repository": {
         "type": "git",
