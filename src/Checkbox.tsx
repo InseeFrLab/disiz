@@ -2,11 +2,14 @@ import { useState, useEffect, memo } from "react";
 import MuiCheckbox from "@mui/material/Checkbox";
 import type { CheckboxProps as MuiCheckboxProps } from "@mui/material/Checkbox";
 import { useConstCallback } from "powerhooks/useConstCallback";
+import { makeStyles } from "./lib/ThemeProvider";
 
 export type CheckboxProps = MuiCheckboxProps;
 
 export const Checkbox = memo((props: CheckboxProps) => {
-    const { defaultChecked: props_defaultChecked, ...rest } = props;
+    const { defaultChecked: props_defaultChecked, className, ...rest } = props;
+
+    const { classes, cx } = useStyles();
 
     const defaultChecked =
         rest.checked === undefined ? false : props_defaultChecked ?? false;
@@ -25,6 +28,7 @@ export const Checkbox = memo((props: CheckboxProps) => {
 
     return (
         <MuiCheckbox
+            className={cx(classes.MuiCheckbox, className)}
             {...rest}
             {...(rest.checked !== undefined
                 ? {
@@ -38,3 +42,12 @@ export const Checkbox = memo((props: CheckboxProps) => {
         />
     );
 });
+
+const useStyles = makeStyles({ "name": { Checkbox } })(theme => ({
+    "MuiCheckbox": {
+        "color": theme.colors.useCases.typography.tertiary,
+        "&.Mui-checked": {
+            color: theme.colors.useCases.typography.primary,
+        },
+    },
+}));
