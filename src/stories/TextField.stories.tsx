@@ -1,4 +1,4 @@
-import { TextField } from "../TextFiled";
+import { TextField } from "../TextField";
 import { sectionName } from "./sectionName";
 import { getStoryFactory, logCallbacks } from "./getStory";
 
