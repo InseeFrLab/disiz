@@ -1,0 +1,134 @@
+import { TextField } from "../TextFiled";
+import { sectionName } from "./sectionName";
+import { getStoryFactory, logCallbacks } from "./getStory";
+
+const { meta, getStory } = getStoryFactory({
+    sectionName,
+    "wrappedComponent": { TextField },
+    "argTypes": {
+        "inputProps_aria-invalid": {
+            "control": {
+                "type": "boolean",
+            },
+        },
+    },
+});
+
+export default meta;
+
+export const VueDefault = getStory({
+    "defaultValue": "",
+    "inputProps_aria-label": "the aria label",
+    "label": "This is the label",
+    "getIsValidValue": value => {
+        console.log("getIsValidValue invoked: ", value);
+
+        if (value.includes(" ")) {
+            return { "isValidValue": false, "message": "Can't include spaces" };
+        }
+
+        return { "isValidValue": true };
+    },
+    ...logCallbacks([
+        "onEscapeKeyDown",
+        "onEnterKeyDown",
+        "onBlur",
+        "onSubmit",
+        "onValueBeingTypedChange",
+    ]),
+});
+
+export const VuePassword = getStory({
+    "defaultValue": "",
+    "inputProps_aria-label": "password",
+    "label": "Password",
+    "type": "password",
+    "getIsValidValue": value => {
+        console.log("getIsValidValue invoked: ", value);
+
+        if (value.includes(" ")) {
+            return { "isValidValue": false, "message": "Can't include spaces" };
+        }
+
+        return { "isValidValue": true };
+    },
+    ...logCallbacks([
+        "onEscapeKeyDown",
+        "onEnterKeyDown",
+        "onBlur",
+        "onSubmit",
+        "onValueBeingTypedChange",
+    ]),
+});
+
+export const VueWithHint = getStory({
+    "helperText": "This is an helper text",
+    "defaultValue": "",
+    "inputProps_aria-label": "input with hint",
+    "label": "Foo bar",
+    "type": "text",
+    "getIsValidValue": value => {
+        console.log("getIsValidValue invoked: ", value);
+
+        if (value.includes(" ")) {
+            return { "isValidValue": false, "message": "Can't include spaces" };
+        }
+
+        return { "isValidValue": true };
+    },
+    ...logCallbacks([
+        "onEscapeKeyDown",
+        "onEnterKeyDown",
+        "onBlur",
+        "onSubmit",
+        "onValueBeingTypedChange",
+    ]),
+});
+
+export const VueWithHintAndQuestionMark = getStory({
+    "helperText": "This is an helper text",
+    "questionMarkHelperText": "This is an extra helper text",
+    "defaultValue": "",
+    "inputProps_aria-label": "input with hint",
+    "label": "Foo bar",
+    "type": "text",
+    "getIsValidValue": value => {
+        console.log("getIsValidValue invoked: ", value);
+
+        if (value.includes(" ")) {
+            return { "isValidValue": false, "message": "Can't include spaces" };
+        }
+
+        return { "isValidValue": true };
+    },
+    ...logCallbacks([
+        "onEscapeKeyDown",
+        "onEnterKeyDown",
+        "onBlur",
+        "onSubmit",
+        "onValueBeingTypedChange",
+    ]),
+});
+
+export const VueTextArea = getStory({
+    "multiline": true,
+    "defaultValue": "First line\nSecond line",
+    "inputProps_aria-label": "the aria label",
+    "label": "This is the label",
+    "getIsValidValue": value => {
+        console.log("getIsValidValue invoked: ", value);
+
+        if (value.includes(" ")) {
+            return { "isValidValue": false, "message": "Can't include spaces" };
+        }
+
+        return { "isValidValue": true };
+    },
+    ...logCallbacks([
+        "onEscapeKeyDown",
+        "onEnterKeyDown",
+        "onBlur",
+        "onSubmit",
+        "onValueBeingTypedChange",
+    ]),
+});
