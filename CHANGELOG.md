@@ -1,3 +1,13 @@
+### **0.0.6** (2022-08-01)  
+  
+- Update package.json  
+- Update Checkbox.stories.tsx  
+- Update intro.stories.mdx  
+- Update README.md  
+- Add files via upload  
+- fix textfield import in story  
+- change Checkbox color as specified in the figma    
+  
 ### **0.0.5** (2022-07-08)  
   
 - add textField  
