@@ -1,6 +1,6 @@
 {
     "name": "disiz",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "A uli toolkit, like material-ui but with stronger typing and more opinionated",
     "repository": {
         "type": "git",
@@ -47,8 +47,12 @@
         "!dist/package.json",
         "!dist/tsconfig.tsbuildinfo"
     ],
-    "keywords": [],
-    "homepage": "Need to be replace",
+    "keywords": [
+        "react",
+        "react-component",
+        "mui"
+    ],
+    "homepage": "https://inseefrlab.github.io/disiz/",
     "peerDependencies": {
         "@emotion/react": "^11.9.0",
         "@mui/material": "^5.8.2",
