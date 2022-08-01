@@ -1,5 +1,6 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/81740200/177208651-d30bf0d4-68e6-4fb0-a43d-ef0e84c1cf78.png"/>  
+ <img src="https://user-images.githubusercontent.com/81740200/182105896-2c1b04ce-a02f-4bbe-a3e5-ec1c16e0bf15.png#gh-light-mode-only"/>
+ <img src="https://user-images.githubusercontent.com/81740200/182106566-100cfb98-814a-4c13-bddd-27a6e16dbf99.png#gh-dark-mode-only" />
 </p>
 <p align="center">
     <i>A disruptive UI toolkit</i><br>
