@@ -1,10 +1,12 @@
 import { create } from "@storybook/theming";
 import logo from "./static/onyxiaLogo.png";
+import logoLight from "./static/logoLight.png";
+import logoDark from "./static/logoDark.png";
 
 export const darkTheme = create({
     "base": "dark",
     "brandTitle": "Disiz UI",
-    "brandImage": logo,
+    "brandImage": logoDark,
     "brandUrl": "https://github.com/InseeFrLab/disiz",
 
     "appBg": "#0A192E",
@@ -24,7 +26,7 @@ export const darkTheme = create({
 export const lightTheme = create({
     "base": "light",
     "brandTitle": "Disiz UI",
-    "brandImage": logo,
+    "brandImage": logoLight,
     "brandUrl": "https://github.com/InseeFrLab/disiz",
 
     "appBg": "#F5F7FA",
